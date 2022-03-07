@@ -4,7 +4,7 @@ public class SeparateThread {
 
     public static void main(String[] args) {
 
-        Concurrency thread1 = new Concurrency(1); // create an object of class Concurrent which is a thread
+        Concurrency thread1 = new Concurrency(2); // create an object of class Concurrent which is a thread
 
         thread1.start();
     }

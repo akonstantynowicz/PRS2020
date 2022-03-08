@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import streams.model.Student;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Maps {
     static Logger log = Logger.getLogger(Maps.class);
@@ -55,8 +56,11 @@ public class Maps {
     }
 
     public void printListOfStudentsSurnamesInCapitalLetter() {
-        log.info("Students that have first name and last name with different letter");
-        //ToDo
+        students.stream()
+                .map(student -> {student.setSurname(student.getSurname().toUpperCase());
+                return student;
+                })
+                .forEach(s -> log.info(s.getSurname()));
     }
 
 }

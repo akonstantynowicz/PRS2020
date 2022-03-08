@@ -24,7 +24,6 @@ public class ListsExample {
 
         // Zobacz że mamy dodatkowe metody do wykorzystania
         LinkedList listaLinkowana = new LinkedList();
-
         // Stos jest jak lista ale ma inne metody
         Stack<Long> stos1 = new Stack<>();
     }

@@ -10,10 +10,10 @@ public class DebugExample {
 
         int silnia = 1;
 
-        for(int i = 0;i<15;i++ ) {
+        for(int i = 1;i<20;i++ ) {
             silnia = i*silnia;
         }
 
-        log.info("Silnia 15 : " + silnia);
+        log.info("Silnia 20 : " + silnia);
     }
 }

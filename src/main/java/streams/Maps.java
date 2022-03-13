@@ -62,5 +62,4 @@ public class Maps {
                 })
                 .forEach(s -> log.info(s.getSurname()));
     }
-
 }

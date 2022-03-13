@@ -24,6 +24,8 @@ public class Collect {
         List<Student> studentsWithAname = students.stream()
                 .filter(student -> student.getName().startsWith("A"))
                 .collect(Collectors.toList());
+        studentsWithAname.forEach(student -> log.info(student.getName()));
+
     }
 
     public void collectStudentsWithNameStartsWithA_vs2() {
@@ -31,14 +33,14 @@ public class Collect {
         Set<Student> studentsWithAname = students.stream()
                 .filter(student -> student.getName().startsWith("A"))
                 .collect(Collectors.toSet());
+        studentsWithAname.forEach(student -> log.info(student.getName()));
     }
 
     public void groupStudentByGrade() {
         log.info("Group student by grade");
         Map<Double, List<Student>> studentsByGrade = students.stream()
                 .collect(Collectors.groupingBy(Student::getGrade));
-
-        //ToDo print those students
+        studentsByGrade.forEach((g, s_list) -> {log.info(g); s_list.forEach(s -> log.info(s.getName() + " " + s.getSurname()));});
     }
 
     public void groupStudentByGradeVs2() {
@@ -54,6 +56,7 @@ public class Collect {
                             left.addAll(right);
                             return left;
                         }));
+        studentsByGrade.forEach((g, s_list) -> {log.info(g); s_list.forEach(s -> log.info(s.getName() + " " + s.getSurname()));});
     }
 
     public void partitionStudentWhoPassAndFail() {
@@ -61,7 +64,7 @@ public class Collect {
         Map<Boolean, List<Student>> groups =
                 students.stream().collect(Collectors.partitioningBy(s -> s.getGrade() > 2));
 
-        //ToDo print those students
+        groups.forEach((g, s_list) -> {log.info(g?"passed":"failed"); s_list.forEach(s -> log.info(s.getName() + " " + s.getSurname()));});
     }
 
     public void mapHobbiesToStudents() {

@@ -51,7 +51,13 @@ public class OtherOperations {
     }
 
     public void print3StudentsThatPassedWithPositiveGradeWithLowestTestScore() {
-        //ToDo
+        log.info("3 Students that barely passed");
+        students.stream()
+                .filter(student -> student.getGrade() > 2)
+                .sorted(Comparator.comparing(Student::getTestResults))
+                .map(student -> student.getName() + " " + student.getSurname() + " " + student.getTestResults() + " " + student.getGrade())
+                .limit(3)
+                .forEach(s -> log.info(s));
     }
 
 }

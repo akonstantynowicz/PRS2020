@@ -16,55 +16,53 @@ public class StreamOperationsExample {
 
         List<Student> students = createDataSet();
 
-        Filters filter = new Filters(students);
-        filter.filterStudentsWithNameStartsWithA();
-        filter.filterStudentsThatGet5();
-        filter.filterStudentsThatAreFemale();
+//        Filters filter = new Filters(students);
+//        filter.filterStudentsWithNameStartsWithA();
+//        filter.filterStudentsThatGet5();
+//        filter.filterStudentsThatAreFemale();
+//        //DONE
+//        filter.filterStudentsThatFailTest();
+//        filter.filterStudentsWhichNamesAndSurnamesStartWithDifferentLetter();
 
-        //Todo
-        filter.filterStudentsThatFailTest();
-        filter.filterStudentsWhichNamesAndSurnamesStartWithDifferentLetter();
+//        Maps maps = new Maps(students);
+//        maps.filterStudentsWithNameStartsWithA();
+//        maps.filterStudentsWithNameStartsWithA_vs2();
+//        maps.filterStudentsThatGet5();
+//        maps.makeAllStudentGet5();
+          //DONE
+//        maps.printListOfStudentsSurnamesInCapitalLetter();
+//
+//        OtherOperations otherOperations = new OtherOperations(students);
+//        otherOperations.printStudentNames();
+//        otherOperations.printFirstThreeStudentsNames();
+//        otherOperations.printNamesAlphabetically();
+//        otherOperations.printBestThreeStudentsNames();
+//
+//        //Todo
+//        otherOperations.print3StudentsThatPassedWithPositiveGradeWithLowestTestScore();
+//
+//        FlatMaps flatMaps = new FlatMaps(students);
+//        flatMaps.printStudentHobbies();
+//        flatMaps.printDistinctStudentHobbies();
+//
+//        Terminals terminals = new Terminals(students);
+//        terminals.isThereStudentWhoFailExam();
+//        terminals.hasAllStudentsPassExam();
+//        terminals.hasAllStudentsPassExamVs2();
+//        terminals.findRandomStudentWhoGet3();
+//        terminals.findFirstStudentWhoGet3();
+//        terminals.removeStudentsWhoFailExam();
+//
+//        Collect collect = new Collect(students);
+//        collect.collectStudentsWithNameStartsWithA();
+//        collect.collectStudentsWithNameStartsWithA_vs2();
+//        collect.groupStudentByGrade();
+//        collect.groupStudentByGradeVs2();
+//        collect.partitionStudentWhoPassAndFail();
 
-        Maps maps = new Maps(students);
-        maps.filterStudentsWithNameStartsWithA();
-        maps.filterStudentsWithNameStartsWithA_vs2();
-        maps.filterStudentsThatGet5();
-        maps.makeAllStudentGet5();
-
-        //Todo
-        maps.printListOfStudentsSurnamesInCapitalLetter();
-
-        OtherOperations otherOperations = new OtherOperations(students);
-        otherOperations.printStudentNames();
-        otherOperations.printFirstThreeStudentsNames();
-        otherOperations.printNamesAlphabetically();
-        otherOperations.printBestThreeStudentsNames();
-
-        //Todo
-        otherOperations.print3StudentsThatPassedWithPositiveGradeWithLowestTestScore();
-
-        FlatMaps flatMaps = new FlatMaps(students);
-        flatMaps.printStudentHobbies();
-        flatMaps.printDistinctStudentHobbies();
-
-        Terminals terminals = new Terminals(students);
-        terminals.isThereStudentWhoFailExam();
-        terminals.hasAllStudentsPassExam();
-        terminals.hasAllStudentsPassExamVs2();
-        terminals.findRandomStudentWhoGet3();
-        terminals.findFirstStudentWhoGet3();
-        terminals.removeStudentsWhoFailExam();
-
-        Collect collect = new Collect(students);
-        collect.collectStudentsWithNameStartsWithA();
-        collect.collectStudentsWithNameStartsWithA_vs2();
-        collect.groupStudentByGrade();
-        collect.groupStudentByGradeVs2();
-        collect.partitionStudentWhoPassAndFail();
-
-        //ToDo
-        collect.mapHobbiesToStudents();
-
+//        //ToDo
+//        collect.mapHobbiesToStudents();
+//
     }
 
     private static List<Student> createDataSet() {

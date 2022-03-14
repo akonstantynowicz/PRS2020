@@ -45,15 +45,21 @@ class CounterThread {
     }
 
     public void increment() {
-        number++;
+        synchronized (this) {
+            number++;
+        }
     }
 
 
     public void decrement() {
-        number--;
+        synchronized (this) {
+            number--;
+        }
     }
 
-    public Integer getNumber() {
-        return number;
+    public synchronized Integer getNumber() {
+        synchronized (this) {
+            return number;
+        }
     }
 }

@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -57,7 +58,7 @@ public class WaitNotifyMultiprocess {
         IntStream.rangeClosed(1, 1000).forEach(num -> {
                 Random r = new Random();
                 try {
-                    Thread.sleep(r.nextInt() % 2000);
+                    Thread.sleep(Math.abs(r.nextInt()) % 2000);
                     producer.produce(r.nextInt());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -81,19 +82,39 @@ class ProducerConsumerMultiprocess {
     }
 
     public void produce(Integer num) throws InterruptedException {
-        synchronized (this) {
+        lock.lock();
+        try {
             logger.info("Start produce " + num);
             queue.add(num);
+            condition.signal();
             logger.info("Finish produce");
+        }finally {
+            lock.unlock();
         }
     }
 
     public boolean consume() throws InterruptedException {
-        synchronized (this) {
-            logger.info("Start consume");
-            Integer num = queue.poll();
-            logger.info("Finish consume " + num);
-            return queue.size() == 0;
+        lock.lock();
+        try {
+            if (queue.size() == 0) {
+                logger.info("Waiting for data..");
+                condition.await(2, TimeUnit.SECONDS);
+                if (queue.size() == 0){
+                    return false;
+                }else{
+                    logger.info("Start consume");
+                    Integer num = queue.poll();
+                    logger.info("Finish consume " + num);
+                    return true;
+                }
+            }else {
+                logger.info("Start consume");
+                Integer num = queue.poll();
+                logger.info("Finish consume " + num);
+                return true;
+            }
+        }finally {
+            lock.unlock();
         }
     }
 }

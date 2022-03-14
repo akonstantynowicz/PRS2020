@@ -49,12 +49,24 @@ class CounterThreadLocks {
     }
 
     public void increment() {
-        number++;
+        lock.lock();
+        try {
+            number++;
+        }finally {
+            lock.unlock();
+        }
+
     }
 
 
     public void decrement() {
-        number--;
+        lock.lock();
+        try {
+            number--;
+        }finally {
+            lock.unlock();
+        }
+
     }
 
     public Integer getNumber() {

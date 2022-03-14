@@ -2,12 +2,13 @@ package atomic;
 
 import org.apache.log4j.Logger;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 public class CounterSynchronized {
 
     static Logger logger = Logger.getLogger(CounterSynchronized.class);
-    static Integer number = 0;
+    static AtomicInteger number = new AtomicInteger(0);
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -38,22 +39,22 @@ public class CounterSynchronized {
 
 class CounterThreadSynchronized {
 
-    Integer number;
+    AtomicInteger number;
 
-    public CounterThreadSynchronized(Integer number) {
+    public CounterThreadSynchronized(AtomicInteger number) {
         this.number = number;
     }
 
     public void increment() {
-        number++;
+        number.incrementAndGet();
     }
 
 
     public void decrement() {
-        number--;
+        number.decrementAndGet();
     }
 
     public Integer getNumber() {
-        return number;
+        return number.get();
     }
 }

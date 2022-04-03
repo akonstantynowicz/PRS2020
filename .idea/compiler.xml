@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="PracowniaMain" />
         <module name="Executor" />
+        <module name="PRS2020" />
         <module name="PRS2022" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Executor" options="-parameters" />
+      <module name="PRS2020" options="-parameters" />
       <module name="PRS2022" options="-parameters" />
       <module name="PracowniaMain" options="-parameters" />
     </option>

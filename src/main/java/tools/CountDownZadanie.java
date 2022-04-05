@@ -26,13 +26,23 @@ public class CountDownZadanie {
                     e.printStackTrace();
                 }
                 logger.info("Working long finished" + Thread.currentThread().getName());
+                latch.countDown();
                 logger.info("Wait to finish" + Thread.currentThread().getName());
-                //tu dodaj zatrzask
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 logger.info("Finished" + Thread.currentThread().getName());
             });
         });
 
         Thread threadKiller = new Thread(() -> {
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             service.shutdown();
         });
 

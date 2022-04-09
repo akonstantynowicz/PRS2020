@@ -1,16 +1,6 @@
 package prs.project;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Stream;
-
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -26,18 +16,13 @@ import prs.project.controllers.Settings;
 import prs.project.model.Product;
 import prs.project.model.Warehouse;
 import prs.project.status.ReplyToAction;
-import prs.project.task.Akcja;
-import prs.project.task.SterowanieAkcja;
-import prs.project.task.Wycena;
-import prs.project.task.WycenaAkcje;
-import prs.project.task.Wydarzenia;
-import prs.project.task.WydarzeniaAkcje;
-import prs.project.task.Zamowienia;
-import prs.project.task.ZamowieniaAkcje;
-import prs.project.task.Zaopatrzenie;
-import prs.project.task.ZaopatrzenieAkcje;
+import prs.project.task.*;
 
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -122,14 +107,14 @@ public class ParallelExecutor {
             try{
                 odpowiedz.setProdukt(akcja.getProduct());
                 odpowiedz.setCena(magazyn.getCeny().get(akcja.getProduct()));
+                if (mojeTypy.contains(Wycena.PROMO_CO_10_WYCEN)) {
+                    promoLicznik++;
+                    if (promoLicznik == 10)
+                        odpowiedz.setCena(0L);
+                    promoLicznik=0L;
+                }
             }finally {
                 lockInwentaryzacja.unlock();
-            }
-            if (mojeTypy.contains(Wycena.PROMO_CO_10_WYCEN)) {
-                promoLicznik++;
-                if (promoLicznik == 10)
-                    odpowiedz.setCena(0L);
-                    promoLicznik=0L;
             }
         }
         if (WycenaAkcje.ZMIEN_CENE.equals(akcja.getTyp())) {
@@ -261,7 +246,14 @@ public class ParallelExecutor {
             odpowiedz.setStanMagazynów(magazyn.getStanMagazynowy());
             odpowiedz.setGrupaProduktów(magazyn.getCeny());
         }
-        return odpowiedz;
+
+        lockProducts.lock();
+        try{
+            System.out.println();
+            return odpowiedz;
+        }finally {
+            lockProducts.unlock();
+        }
     }
 
     public void wyslijOdpowiedz(ReplyToAction odpowiedz) throws IOException {
